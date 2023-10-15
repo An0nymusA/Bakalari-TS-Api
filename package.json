@@ -3,7 +3,6 @@
     "name": "bakalari-ts-api",
     "version": "1.0.0",
     "type": "module",
-    "main": "build/index.js",
     "devDependencies": {
         "@types/node": "~18",
         "@typescript-eslint/eslint-plugin": "~6.2",
@@ -13,7 +12,6 @@
         "typescript": "~5.1"
     },
     "scripts": {
-        "start": "node build/src/main.js",
         "build": "tsc -p tsconfig.json",
         "build:watch": "tsc -w -p tsconfig.json"
     },
