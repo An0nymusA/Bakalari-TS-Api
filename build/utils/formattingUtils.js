@@ -30,12 +30,13 @@ export function formatTimetable(timetable) {
         });
     });
     // Remove unused hour
-    const firstHourId = hoursLabels[0].Id;
-    if (Object.values(days).every((day) => day[firstHourId] === null)) {
-        for (const day of Object.values(days)) {
-            delete day[firstHourId];
+    Object.keys(hoursLabels).forEach((hourId) => {
+        if (Object.values(days).every((day) => day[hourId] === null)) {
+            for (const day of Object.values(days)) {
+                delete day[hourId];
+            }
         }
-    }
+    });
     return { hoursLabels, days };
 }
 export function formatMarks(marks) {
