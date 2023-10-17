@@ -31,7 +31,10 @@ export function formatTimetable(timetable) {
                 Teacher: timetable.Teachers[atom.TeacherId]?.Abbrev,
                 Room: timetable.Rooms[atom.RoomId]?.Abbrev,
                 Change: atom.Change,
-                CycleIds: atom.CycleIds,
+                CycleIds: atom.CycleIds.reduce((acc, curr) => {
+                    acc.push(timetable.Cycles[curr]?.Abbrev);
+                    return acc;
+                }, []),
             };
             // Push the new atom information to the list of atoms for this HourId
             days[day.DayOfWeek][atom.HourId].push(atomInfo);
