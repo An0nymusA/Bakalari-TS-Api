@@ -1,6 +1,6 @@
 import { Kommens, KommensMessage } from '../types/kommens.js';
 import { Mark, Marks, Subject } from '../types/marks.js';
-import { Change, Timetable } from '../types/timetable.js';
+import { Change, Cycle, Timetable } from '../types/timetable.js';
 export declare function formatTimetable(timetable: Timetable): FormattedTimetable;
 export declare function formatMarks(marks: Marks): FormattedMarks;
 export declare function formatKommens(general: Kommens, noticeboard?: Kommens): FormattedKommens;
@@ -32,7 +32,9 @@ interface FormattedTimetable {
         Subject: string;
         Teacher: string;
         Room: string;
+        CycleIds: string[] | null;
     }>;
+    cycles: Record<string, Cycle>;
 }
 interface FormattedKommensMessage extends KommensMessage {
     channel: string;

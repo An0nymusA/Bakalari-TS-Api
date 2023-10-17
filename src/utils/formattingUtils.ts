@@ -1,6 +1,6 @@
 import { Kommens, KommensMessage } from '../types/kommens.js';
 import { Mark, Marks, Subject } from '../types/marks.js';
-import { Change, Hour, Timetable } from '../types/timetable.js';
+import { Change, Cycle, Hour, Timetable } from '../types/timetable.js';
 
 export function formatTimetable(timetable: Timetable): FormattedTimetable {
     const hoursLabels: Record<number, Hour> = Object.values(timetable.Hours)
@@ -12,6 +12,7 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
         })
         .reduce((acc, hour) => {
             acc[hour.Id] = hour;
+
             return acc;
         }, {});
 
@@ -30,12 +31,22 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
         day.Atoms.forEach((atom) => {
-            days[day.DayOfWeek][atom.HourId] = {
+            // Check if there is already an entry for the HourId, if not, initialize with an empty array
+            if (!days[day.DayOfWeek][atom.HourId]) {
+                days[day.DayOfWeek][atom.HourId] = [];
+            }
+
+            // Create a new object representing the current atom's information
+            const atomInfo = {
                 Subject: timetable.Subjects[atom.SubjectId]?.Abbrev,
                 Teacher: timetable.Teachers[atom.TeacherId]?.Abbrev,
                 Room: timetable.Rooms[atom.RoomId]?.Abbrev,
                 Change: atom.Change,
+                CycleIds: atom.CycleIds,
             };
+
+            // Push the new atom information to the list of atoms for this HourId
+            days[day.DayOfWeek][atom.HourId].push(atomInfo);
         });
     });
 
@@ -48,7 +59,7 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
         }
     });
 
-    return { hoursLabels, days };
+    return { hoursLabels, days, cycles: timetable.Cycles };
 }
 
 export function formatMarks(marks: Marks): FormattedMarks {
@@ -156,8 +167,10 @@ interface FormattedTimetable {
             Subject: string;
             Teacher: string;
             Room: string;
+            CycleIds: string[] | null;
         }
     >;
+    cycles: Record<string, Cycle>;
 }
 
 interface FormattedKommensMessage extends KommensMessage {
