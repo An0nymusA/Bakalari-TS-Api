@@ -21,7 +21,7 @@ declare class BakalariApiConnector extends ApiConnector {
      * @param authOptions - Authentication options to be used for logging in
      * @returns Instance of the BakalariApiConnector class
      */
-    static initialize: (authOptions: BakalariAuthOptions) => Promise<BakalariApiConnector> | null;
+    static initialize: (authOptions: BakalariAuthOptions) => Promise<BakalariApiConnector>;
 }
 export default BakalariApiConnector;
 export { BakalariAuthOptions };

@@ -20,11 +20,11 @@ declare class BakalariApi {
     /**
      * Static method to initialize the BakalariApi. This ensures proper setup before accessing the API
      */
-    static initialize: (authOptions: BakalariAuthOptions) => Promise<BakalariApi> | null;
+    static initialize: (authOptions: BakalariAuthOptions) => Promise<BakalariApi>;
     /**
      * Getter for retrieving the singleton instance of BakalariApi
      */
-    static get getInstance(): BakalariApi | null;
+    static get getInstance(): BakalariApi;
     /**
      * Constructor initializes the API with the provided BakalariApiConnector instance
      * @param connector - Instance of BakalariApiConnector to be used for API requests
@@ -67,11 +67,11 @@ declare class BakalariApi {
     /**
      * Gets list of schools
      */
-    static getMunicipality(): Promise<City[]> | null;
+    static getMunicipality(): Promise<City[]>;
     /**
      * Get list of websites for City / City part
      * @param city - City / City part name
      */
-    static getMunicipality(city: string): Promise<School[]> | null;
+    static getMunicipality(city: string): Promise<School[]>;
 }
 export default BakalariApi;

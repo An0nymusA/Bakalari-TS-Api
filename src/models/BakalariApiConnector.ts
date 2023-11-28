@@ -89,7 +89,7 @@ class BakalariApiConnector extends ApiConnector {
      */
     static initialize = async (
         authOptions: BakalariAuthOptions,
-    ): Promise<BakalariApiConnector> | null => {
+    ): Promise<BakalariApiConnector> => {
         // Checks if the baseURL is provided
         if (authOptions.baseUrl == null) {
             throw new Error('URL must be set');

@@ -74,7 +74,7 @@ class BakalariApi {
      */
     static initialize = async (
         authOptions: BakalariAuthOptions,
-    ): Promise<BakalariApi> | null => {
+    ): Promise<BakalariApi> => {
         // Initializes the BakalariApiConnector with the provided authentication options
         const connector = await BakalariApiConnector.initialize(authOptions);
 
@@ -85,7 +85,7 @@ class BakalariApi {
     /**
      * Getter for retrieving the singleton instance of BakalariApi
      */
-    static get getInstance(): BakalariApi | null {
+    static get getInstance(): BakalariApi {
         // Ensure the BakalariApi is initialized before accessing it
         if (BakalariApi.instance == null) {
             throw new Error('BakalariApi is not initialized');
@@ -177,13 +177,13 @@ class BakalariApi {
     /**
      * Gets list of schools
      */
-    static getMunicipality(): Promise<City[]> | null;
+    static getMunicipality(): Promise<City[]>;
 
     /**
      * Get list of websites for City / City part
      * @param city - City / City part name
      */
-    static getMunicipality(city: string): Promise<School[]> | null;
+    static getMunicipality(city: string): Promise<School[]>;
 
     static async getMunicipality(city?: string): Promise<City[] | School[]> {
         const connector = new ApiConnector({
