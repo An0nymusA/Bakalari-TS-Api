@@ -1,10 +1,11 @@
+import BakalariApiConnector, { BakalariAuthOptions } from './BakalariApiConnector.js';
 import { Kommens, KommensOptions } from '../types/kommens.js';
+import { Timetable, TimetableOptions } from '../types/timetable.js';
 import { Marks } from '../types/marks.js';
 import { Subjects } from '../types/subjects.js';
-import { Timetable, TimetableOptions } from '../types/timetable.js';
 import { User } from '../types/user.js';
-import BakalariApiConnector, { BakalariAuthOptions } from './BakalariApiConnector.js';
 import { City, School } from '../types/municipality.js';
+import { Absences } from '../types/absence.js';
 /**
  * The BakalariApi class acts as the main entry point for interacting with the Bakalari API
  */
@@ -40,6 +41,7 @@ declare class BakalariApi {
      * @returns {Promise<Subjects>}
      */
     subjects(): Promise<Subjects>;
+    absence(): Promise<Absences>;
     /**
      * Get timetable based on given options
      * @param {string} options.type - Type of timetable to get (actual, permanent)

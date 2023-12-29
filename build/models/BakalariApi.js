@@ -85,6 +85,13 @@ class BakalariApi {
     async subjects() {
         return (await this.connector.get(`/api/3/subjects`)).data;
     }
+    /*
+     * Get absence info for the current user
+     * @returns {Promise<Absences>}
+     */
+    async absence() {
+        return (await this.connector.get(`/api/3/absence/student`)).data;
+    }
     /**
      * Get timetable based on given options
      * @param {string} options.type - Type of timetable to get (actual, permanent)
