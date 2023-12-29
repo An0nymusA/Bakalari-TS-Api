@@ -1,15 +1,17 @@
 import { AxiosResponse } from 'axios';
 
-import { Kommens, KommensOptions } from '../types/kommens.js';
-import { Marks } from '../types/marks.js';
-import { Subjects } from '../types/subjects.js';
-import { Timetable, TimetableOptions } from '../types/timetable.js';
-import { User } from '../types/user.js';
 import BakalariApiConnector, {
     BakalariAuthOptions,
 } from './BakalariApiConnector.js';
 import ApiConnector from './ApiConnector.js';
+
+import { Kommens, KommensOptions } from '../types/kommens.js';
+import { Timetable, TimetableOptions } from '../types/timetable.js';
+import { Marks } from '../types/marks.js';
+import { Subjects } from '../types/subjects.js';
+import { User } from '../types/user.js';
 import { City, School } from '../types/municipality.js';
+import { Absences } from '../types/absence.js';
 
 const utils = {
     transformIds: (input): object => {
@@ -118,6 +120,14 @@ class BakalariApi {
      */
     async subjects(): Promise<Subjects> {
         return (await this.connector.get(`/api/3/subjects`)).data;
+    }
+
+    /*
+     * Get absence info for the current user
+     * @returns {Promise<Absences>}
+     */
+    async absence(): Promise<Absences> {
+        return (await this.connector.get(`/api/3/absence/student`)).data;
     }
 
     /**
