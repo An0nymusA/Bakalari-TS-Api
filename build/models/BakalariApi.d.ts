@@ -1,5 +1,5 @@
 import BakalariApiConnector, { BakalariAuthOptions } from './BakalariApiConnector.js';
-import { Kommens, KommensOptions } from '../types/kommens.js';
+import { Komens, KomensOptions } from '../types/komens.js';
 import { Timetable, TimetableOptions } from '../types/timetable.js';
 import { Marks } from '../types/marks.js';
 import { Subjects } from '../types/subjects.js';
@@ -57,9 +57,9 @@ declare class BakalariApi {
     /**
      * Get all messages based on given options
      * @param options.noticeboard - Whether to get messages from the noticeboard or not
-     * @returns {Promise<Kommens>}
+     * @returns {Promise<Komens>}
      */
-    kommens(options?: KommensOptions): Promise<Kommens>;
+    komens(options?: KomensOptions): Promise<Komens>;
     attachment(options: {
         id: string;
     }): Promise<{

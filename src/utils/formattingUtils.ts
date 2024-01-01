@@ -1,4 +1,4 @@
-import { Kommens, KommensMessage } from '../types/kommens.js';
+import { Komens, KomensMessage } from '../types/komens.js';
 import { Mark, Marks, Subject } from '../types/marks.js';
 import { Change, Cycle, Hour, Timetable } from '../types/timetable.js';
 
@@ -103,25 +103,25 @@ export function formatMarks(marks: Marks): FormattedMarks {
     return { subject, date };
 }
 
-export function formatKommens(
-    general: Kommens,
-    noticeboard?: Kommens,
-): FormattedKommens {
-    const reduceKommens = (
-        kommens: Kommens | undefined,
+export function formatKomens(
+    general: Komens,
+    noticeboard?: Komens,
+): FormattedKomens {
+    const reduceKomens = (
+        komens: Komens | undefined,
         channel: string,
-    ): FormattedKommensMessage[] => {
-        if (!kommens || !kommens.Messages) return [];
+    ): FormattedKomensMessage[] => {
+        if (!komens || !komens.Messages) return [];
 
-        return Object.values(kommens.Messages).map((message) => ({
+        return Object.values(komens.Messages).map((message) => ({
             channel,
             ...message,
         }));
     };
 
-    const formatted: FormattedKommensMessage[] = [
-        ...reduceKommens(noticeboard, 'noticeboard'),
-        ...reduceKommens(general, 'general'),
+    const formatted: FormattedKomensMessage[] = [
+        ...reduceKomens(noticeboard, 'noticeboard'),
+        ...reduceKomens(general, 'general'),
     ];
 
     formatted.forEach((message) => {
@@ -176,11 +176,11 @@ interface FormattedTimetable {
     cycles: Record<string, Cycle>;
 }
 
-interface FormattedKommensMessage extends KommensMessage {
+interface FormattedKomensMessage extends KomensMessage {
     channel: string;
     _timestamp?: number;
 }
 
-interface FormattedKommens {
-    [key: string]: FormattedKommensMessage;
+interface FormattedKomens {
+    [key: string]: FormattedKomensMessage;
 }

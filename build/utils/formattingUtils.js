@@ -82,18 +82,18 @@ export function formatMarks(marks) {
     }, {});
     return { subject, date };
 }
-export function formatKommens(general, noticeboard) {
-    const reduceKommens = (kommens, channel) => {
-        if (!kommens || !kommens.Messages)
+export function formatKomens(general, noticeboard) {
+    const reduceKomens = (komens, channel) => {
+        if (!komens || !komens.Messages)
             return [];
-        return Object.values(kommens.Messages).map((message) => ({
+        return Object.values(komens.Messages).map((message) => ({
             channel,
             ...message,
         }));
     };
     const formatted = [
-        ...reduceKommens(noticeboard, 'noticeboard'),
-        ...reduceKommens(general, 'general'),
+        ...reduceKomens(noticeboard, 'noticeboard'),
+        ...reduceKomens(general, 'general'),
     ];
     formatted.forEach((message) => {
         message._timestamp = new Date(message.SentDate).getTime();

@@ -5,7 +5,7 @@ import BakalariApiConnector, {
 } from './BakalariApiConnector.js';
 import ApiConnector from './ApiConnector.js';
 
-import { Kommens, KommensOptions } from '../types/kommens.js';
+import { Komens, KomensOptions } from '../types/komens.js';
 import { Timetable, TimetableOptions } from '../types/timetable.js';
 import { Marks } from '../types/marks.js';
 import { Subjects } from '../types/subjects.js';
@@ -157,11 +157,11 @@ class BakalariApi {
     /**
      * Get all messages based on given options
      * @param options.noticeboard - Whether to get messages from the noticeboard or not
-     * @returns {Promise<Kommens>}
+     * @returns {Promise<Komens>}
      */
-    async kommens(
-        options: KommensOptions = { noticeboard: false },
-    ): Promise<Kommens> {
+    async komens(
+        options: KomensOptions = { noticeboard: false },
+    ): Promise<Komens> {
         return (
             await this.connector.post(`/api/3/komens/messages/{type}`, {
                 type: options.noticeboard || false ? 'noticeboard' : 'received',

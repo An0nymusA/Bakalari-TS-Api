@@ -113,9 +113,9 @@ class BakalariApi {
     /**
      * Get all messages based on given options
      * @param options.noticeboard - Whether to get messages from the noticeboard or not
-     * @returns {Promise<Kommens>}
+     * @returns {Promise<Komens>}
      */
-    async kommens(options = { noticeboard: false }) {
+    async komens(options = { noticeboard: false }) {
         return (await this.connector.post(`/api/3/komens/messages/{type}`, {
             type: options.noticeboard || false ? 'noticeboard' : 'received',
         })).data;

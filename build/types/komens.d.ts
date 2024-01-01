@@ -1,12 +1,10 @@
-interface KommensOptions {
+interface KomensOptions {
     noticeboard: boolean;
 }
-
-interface Kommens {
-    Messages: KommensMessage[];
+interface Komens {
+    Messages: KomensMessage[];
 }
-
-interface KommensMessage {
+interface KomensMessage {
     $type: string;
     Id: string;
     Title: string;
@@ -28,14 +26,12 @@ interface KommensMessage {
     RelevantName: string;
     RelevantPersonType: string;
 }
-
 interface Sender {
     $type: string;
     Id: string;
     Type: string;
     Name: string;
 }
-
 interface AttachmentInfo {
     $type: string;
     Id: string;
@@ -43,5 +39,4 @@ interface AttachmentInfo {
     Type: string;
     Size: number;
 }
-
-export { Kommens, KommensMessage, KommensOptions, Sender, AttachmentInfo };
+export { Komens, KomensMessage, KomensOptions, Sender, AttachmentInfo };
