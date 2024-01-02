@@ -2,8 +2,24 @@ import { Komens, KomensMessage } from '../types/komens.js';
 import { Mark, Marks, MarkSubject } from '../types/marks.js';
 import { Change, Cycle, Hour, Timetable } from '../types/timetable.js';
 
+const trimObject = <T>(
+    obj: Record<number, T>,
+    maxSize: number,
+): Record<number, T> => {
+    const keys = Object.keys(obj).map(Number);
+
+    if (keys.length > maxSize) {
+        return keys.slice(0, maxSize).reduce((newObj, key) => {
+            newObj[key] = obj[key];
+            return newObj;
+        }, {} as Record<number, T>);
+    }
+
+    return obj;
+};
+
 export function formatTimetable(timetable: Timetable): FormattedTimetable {
-    const hoursLabels: Record<number, Hour> = Object.values(timetable.Hours)
+    let hoursLabels: Record<number, Hour> = Object.values(timetable.Hours)
         .sort((a, b) => {
             const [aHour, aMinute] = a.BeginTime.split(':').map(Number);
             const [bHour, bMinute] = b.BeginTime.split(':').map(Number);
@@ -26,22 +42,24 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
     // Initialize days with a template
     for (let i = 1; i <= 5; i++) {
         days[i] = {};
-        days[i]['hours'] = hoursTemplate;
+        days[i]['hours'] = { ...hoursTemplate };
     }
 
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
-        days[day.DayOfWeek]['hours'] = {};
+        const currentDay = days[day.DayOfWeek];
 
-        days[day.DayOfWeek]['dayInfo'] = {
+        currentDay['dayInfo'] = {
             description: day.DayDescription,
             date: day.Date,
         };
 
+        const hours = currentDay['hours'];
+
         day.Atoms.forEach((atom) => {
             // Check if there is already an entry for the HourId, if not, initialize with an empty array
-            if (!days[day.DayOfWeek]['hours'][atom.HourId]) {
-                days[day.DayOfWeek]['hours'][atom.HourId] = [];
+            if (!hours[atom.HourId]) {
+                hours[atom.HourId] = [];
             }
 
             // Create a new object representing the current atom's information
@@ -57,18 +75,45 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
             };
 
             // Push the new atom information to the list of atoms for this HourId
-            days[day.DayOfWeek]['hours'][atom.HourId].push(atomInfo);
+            hours[atom.HourId].push(atomInfo);
         });
     });
 
-    // Remove unused hour
-    Object.keys(hoursLabels).forEach((hourId) => {
-        if (Object.values(days).every((day) => day['hours'][hourId] === null)) {
-            for (const day of Object.values(days)) {
-                delete day['hours'][hourId];
+    if (
+        Object.values(days).every(
+            (day) => Object.keys(day['hours']).length == 0,
+        )
+    ) {
+        hoursLabels = trimObject(hoursLabels, 9);
+    } else {
+        for (const keys of [
+            Object.keys(hoursLabels),
+            Object.keys(hoursLabels).reverse(),
+        ]) {
+            for (const hourId of keys) {
+                if (
+                    Object.values(days).some(
+                        (day) => day['hours'][hourId] !== null,
+                    )
+                ) {
+                    break;
+                }
+
+                if (
+                    !Object.values(days).every(
+                        (day) => day['hours'][hourId] === null,
+                    )
+                ) {
+                    continue;
+                }
+
+                for (const day of Object.values(days)) {
+                    delete day['hours'][hourId];
+                }
+                delete hoursLabels[hourId];
             }
         }
-    });
+    }
 
     return { hoursLabels, days, cycles: timetable.Cycles };
 }
