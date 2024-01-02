@@ -43,4 +43,4 @@ interface FormattedKomensMessage extends KomensMessage {
 interface FormattedKomens {
     [key: string]: FormattedKomensMessage;
 }
-export {};
+export type { FormattedKomens, FormattedKomensMessage, FormattedMarks, FormattedMarksByDate, FormattedMarksBySubject, FormattedTimetable, };
