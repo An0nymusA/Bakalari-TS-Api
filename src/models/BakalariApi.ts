@@ -1,9 +1,10 @@
 import { AxiosResponse } from 'axios';
 
-import BakalariApiConnector, {
+import {
+    BakalariApiConnector,
     BakalariAuthOptions,
 } from './BakalariApiConnector.js';
-import ApiConnector from './ApiConnector.js';
+import { ApiConnector } from './ApiConnector.js';
 
 import { Komens, KomensOptions } from '../types/komens.js';
 import { Timetable, TimetableOptions } from '../types/timetable.js';
@@ -208,4 +209,4 @@ class BakalariApi {
     }
 }
 
-export default BakalariApi;
+export { BakalariApi };

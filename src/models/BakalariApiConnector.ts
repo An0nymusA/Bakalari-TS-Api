@@ -1,5 +1,5 @@
 import { Login } from '../types/login.js';
-import ApiConnector, { AuthOptions } from './ApiConnector.js';
+import { ApiConnector, AuthOptions } from './ApiConnector.js';
 
 async function login(authOptions: BakalariAuthOptions): Promise<Login> {
     const connector = new ApiConnector(authOptions);
@@ -119,8 +119,7 @@ class BakalariApiConnector extends ApiConnector {
     };
 }
 
-export default BakalariApiConnector;
-export { BakalariAuthOptions };
+export { BakalariApiConnector, BakalariAuthOptions };
 
 interface BakalariAuthOptions extends AuthOptions {
     username?: string;

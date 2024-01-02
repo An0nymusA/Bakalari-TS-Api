@@ -33,8 +33,7 @@ declare class ApiConnector {
      */
     post(endpoint?: string, payload?: object, config?: object): Promise<AxiosResponse>;
 }
-export default ApiConnector;
-export { AuthOptions };
+export { ApiConnector, AuthOptions };
 interface AuthOptions {
     baseUrl: string;
     suffix?: string;

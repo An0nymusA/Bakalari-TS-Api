@@ -1,6 +1,6 @@
 interface User {
     UserUID: string;
-    Class: Class;
+    Class: UserClass;
     FullName: string;
     SchoolOrganizationName: string;
     SchoolType: string;
@@ -11,7 +11,7 @@ interface User {
     SettingModules: SettingModule;
 }
 
-interface Class {
+interface UserClass {
     Id: string;
     Abbrev: string;
     Name: string;
@@ -37,4 +37,4 @@ interface ActualSemester {
     To: string;
 }
 
-export { User, Class, EnabledModule, SettingModule, Common, ActualSemester };
+export { User, UserClass, EnabledModule, SettingModule, Common, ActualSemester };

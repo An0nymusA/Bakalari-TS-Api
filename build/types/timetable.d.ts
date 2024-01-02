@@ -5,20 +5,20 @@ interface TimetableOptions {
 interface Timetable {
     Hours?: Array<Hour>;
     Days?: Array<Day>;
-    Classes?: Record<string, Class>;
+    Classes?: Record<string, TimetableClass>;
     Groups?: Record<string, Group>;
-    Subjects?: Record<string, Subject>;
-    Teachers?: Record<string, Teacher>;
+    Subjects?: Record<string, TimetableSubject>;
+    Teachers?: Record<string, TimetableTeacher>;
     Rooms?: Record<string, Room>;
     Cycles?: Record<string, Cycle>;
 }
 interface RawTimetable {
     Hours: Array<Hour>;
     Days: Array<Day>;
-    Classes: Array<Class>;
+    Classes: Array<TimetableClass>;
     Groups: Array<Group>;
-    Subjects: Array<Subject>;
-    Teachers: Array<Teacher>;
+    Subjects: Array<TimetableSubject>;
+    Teachers: Array<TimetableTeacher>;
     Rooms: Array<Room>;
     Cycles: Array<Cycle>;
 }
@@ -60,17 +60,17 @@ interface Entry {
     Abbrev: string;
     Name: string;
 }
-interface Class extends Entry {
+interface TimetableClass extends Entry {
 }
 interface Group extends Entry {
     ClassId: string;
 }
-interface Subject extends Entry {
+interface TimetableSubject extends Entry {
 }
-interface Teacher extends Entry {
+interface TimetableTeacher extends Entry {
 }
 interface Room extends Entry {
 }
 interface Cycle extends Entry {
 }
-export { TimetableOptions, Timetable, RawTimetable, Hour, Day, Atom, Change, Entry, Class, Group, Subject, Teacher, Room, Cycle, };
+export { TimetableOptions, Timetable, RawTimetable, Hour, Day, Atom, Change, Entry, TimetableClass, Group, TimetableSubject, TimetableTeacher, Room, Cycle, };

@@ -59,5 +59,5 @@ class ApiConnector {
         return this.axiosInstance.post(...this.parseVariableRoutes(endpoint, payload), config);
     }
 }
-export default ApiConnector;
+export { ApiConnector };
 //# sourceMappingURL=ApiConnector.js.map

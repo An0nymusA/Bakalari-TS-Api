@@ -1,4 +1,4 @@
-import ApiConnector, { AuthOptions } from './ApiConnector.js';
+import { ApiConnector, AuthOptions } from './ApiConnector.js';
 declare class BakalariApiConnector extends ApiConnector {
     authOptions: BakalariAuthOptions;
     /**
@@ -23,8 +23,7 @@ declare class BakalariApiConnector extends ApiConnector {
      */
     static initialize: (authOptions: BakalariAuthOptions) => Promise<BakalariApiConnector>;
 }
-export default BakalariApiConnector;
-export { BakalariAuthOptions };
+export { BakalariApiConnector, BakalariAuthOptions };
 interface BakalariAuthOptions extends AuthOptions {
     username?: string;
     password?: string;

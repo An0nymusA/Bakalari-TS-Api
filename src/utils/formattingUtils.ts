@@ -1,5 +1,5 @@
 import { Komens, KomensMessage } from '../types/komens.js';
-import { Mark, Marks, Subject } from '../types/marks.js';
+import { Mark, Marks, MarkSubject } from '../types/marks.js';
 import { Change, Cycle, Hour, Timetable } from '../types/timetable.js';
 
 export function formatTimetable(timetable: Timetable): FormattedTimetable {
@@ -138,12 +138,12 @@ export function formatKomens(
 }
 
 interface FormattedMarksByDate {
-    [key: string]: Mark & { Subject: Subject };
+    [key: string]: Mark & { Subject: MarkSubject };
 }
 interface FormattedMarksBySubject {
     [key: string]: {
         Marks: Record<number, Mark>;
-        Subject: Subject;
+        Subject: MarkSubject;
         AverageText: string;
     };
 }

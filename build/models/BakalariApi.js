@@ -1,5 +1,5 @@
-import BakalariApiConnector from './BakalariApiConnector.js';
-import ApiConnector from './ApiConnector.js';
+import { BakalariApiConnector, } from './BakalariApiConnector.js';
+import { ApiConnector } from './ApiConnector.js';
 const utils = {
     transformIds: (input) => {
         const result = {};
@@ -136,5 +136,5 @@ class BakalariApi {
         })).data;
     }
 }
-export default BakalariApi;
+export { BakalariApi };
 //# sourceMappingURL=BakalariApi.js.map

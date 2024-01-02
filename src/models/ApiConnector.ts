@@ -83,8 +83,7 @@ class ApiConnector {
     }
 }
 
-export default ApiConnector;
-export { AuthOptions };
+export { ApiConnector, AuthOptions };
 
 interface AuthOptions {
     baseUrl: string;

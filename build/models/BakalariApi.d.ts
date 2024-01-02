@@ -1,4 +1,4 @@
-import BakalariApiConnector, { BakalariAuthOptions } from './BakalariApiConnector.js';
+import { BakalariApiConnector, BakalariAuthOptions } from './BakalariApiConnector.js';
 import { Komens, KomensOptions } from '../types/komens.js';
 import { Timetable, TimetableOptions } from '../types/timetable.js';
 import { Marks } from '../types/marks.js';
@@ -76,4 +76,4 @@ declare class BakalariApi {
      */
     static getMunicipality(city: string): Promise<School[]>;
 }
-export default BakalariApi;
+export { BakalariApi };

@@ -1,4 +1,4 @@
-import ApiConnector from './ApiConnector.js';
+import { ApiConnector } from './ApiConnector.js';
 async function login(authOptions) {
     const connector = new ApiConnector(authOptions);
     // Makes a POST request to the login endpoint of the Bakalari API
@@ -84,5 +84,5 @@ class BakalariApiConnector extends ApiConnector {
         return new BakalariApiConnector(authOptions);
     };
 }
-export default BakalariApiConnector;
+export { BakalariApiConnector };
 //# sourceMappingURL=BakalariApiConnector.js.map

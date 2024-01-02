@@ -5,7 +5,7 @@ interface Marks {
 
 interface SubjectMarks {
     Marks: Array<Mark>;
-    Subject: Subject;
+    Subject: MarkSubject;
     AverageText: string;
     TemporaryMark: string;
     SubjectNote: string;
@@ -34,7 +34,7 @@ interface Mark {
     MaxPoints: number;
 }
 
-interface Subject {
+interface MarkSubject {
     Id: string;
     Abbrev: string;
     Name: string;
@@ -46,10 +46,4 @@ interface MarkOption {
     Name: string;
 }
 
-export {
-    Marks,
-    SubjectMarks,
-    Mark,
-    Subject,
-    MarkOption,
-};
+export { Marks, SubjectMarks, Mark, MarkSubject, MarkOption };
