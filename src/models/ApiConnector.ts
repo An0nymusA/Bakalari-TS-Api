@@ -44,7 +44,7 @@ class ApiConnector {
         //Remove any remaining (blank) placeholders
         endpoint = endpoint.replaceAll(/\{.+\}/g, '');
 
-        return [endpoint, payload];
+        return [endpoint, { params: payload }];
     }
 
     /**

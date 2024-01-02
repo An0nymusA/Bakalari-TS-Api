@@ -80,11 +80,18 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
     });
 
     if (
+        Object.values(days).every((day) =>
+            Object.values(day['hours']).every((value) => value === null),
+        ) ||
         Object.values(days).every(
             (day) => Object.keys(day['hours']).length == 0,
         )
     ) {
         hoursLabels = trimObject(hoursLabels, 9);
+
+        for (const day of Object.values(days)) {
+            day['hours'] = trimObject(day['hours'], 9);
+        }
     } else {
         for (const keys of [
             Object.keys(hoursLabels),
