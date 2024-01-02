@@ -16,14 +16,20 @@ export function formatTimetable(timetable) {
     const days = {};
     // Initialize days with a template
     for (let i = 1; i <= 5; i++) {
-        days[i] = { ...hoursTemplate, label: i };
+        days[i] = {};
+        days[i]['hours'] = hoursTemplate;
     }
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
+        days[day.DayOfWeek]['hours'] = {};
+        days[day.DayOfWeek]['dayInfo'] = {
+            description: day.DayDescription,
+            date: day.Date,
+        };
         day.Atoms.forEach((atom) => {
             // Check if there is already an entry for the HourId, if not, initialize with an empty array
-            if (!days[day.DayOfWeek][atom.HourId]) {
-                days[day.DayOfWeek][atom.HourId] = [];
+            if (!days[day.DayOfWeek]['hours'][atom.HourId]) {
+                days[day.DayOfWeek]['hours'][atom.HourId] = [];
             }
             // Create a new object representing the current atom's information
             const atomInfo = {
@@ -37,14 +43,14 @@ export function formatTimetable(timetable) {
                 }, []),
             };
             // Push the new atom information to the list of atoms for this HourId
-            days[day.DayOfWeek][atom.HourId].push(atomInfo);
+            days[day.DayOfWeek]['hours'][atom.HourId].push(atomInfo);
         });
     });
     // Remove unused hour
     Object.keys(hoursLabels).forEach((hourId) => {
-        if (Object.values(days).every((day) => day[hourId] === null)) {
+        if (Object.values(days).every((day) => day['hours'][hourId] === null)) {
             for (const day of Object.values(days)) {
-                delete day[hourId];
+                delete day['hours'][hourId];
             }
         }
     });

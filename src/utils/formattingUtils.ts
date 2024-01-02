@@ -25,15 +25,23 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
 
     // Initialize days with a template
     for (let i = 1; i <= 5; i++) {
-        days[i] = { ...hoursTemplate, label: i };
+        days[i] = {};
+        days[i]['hours'] = hoursTemplate;
     }
 
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
+        days[day.DayOfWeek]['hours'] = {};
+
+        days[day.DayOfWeek]['dayInfo'] = {
+            description: day.DayDescription,
+            date: day.Date,
+        };
+
         day.Atoms.forEach((atom) => {
             // Check if there is already an entry for the HourId, if not, initialize with an empty array
-            if (!days[day.DayOfWeek][atom.HourId]) {
-                days[day.DayOfWeek][atom.HourId] = [];
+            if (!days[day.DayOfWeek]['hours'][atom.HourId]) {
+                days[day.DayOfWeek]['hours'][atom.HourId] = [];
             }
 
             // Create a new object representing the current atom's information
@@ -49,15 +57,15 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
             };
 
             // Push the new atom information to the list of atoms for this HourId
-            days[day.DayOfWeek][atom.HourId].push(atomInfo);
+            days[day.DayOfWeek]['hours'][atom.HourId].push(atomInfo);
         });
     });
 
     // Remove unused hour
     Object.keys(hoursLabels).forEach((hourId) => {
-        if (Object.values(days).every((day) => day[hourId] === null)) {
+        if (Object.values(days).every((day) => day['hours'][hourId] === null)) {
             for (const day of Object.values(days)) {
-                delete day[hourId];
+                delete day['hours'][hourId];
             }
         }
     });
@@ -153,6 +161,21 @@ interface FormattedMarks {
     subject: FormattedMarksBySubject;
 }
 
+interface FormattedTimetableHour {
+    Change: Change;
+    Subject: string;
+    Teacher: string;
+    Room: string;
+    CycleIds: string[] | null;
+}
+interface FormattedTimetableDay {
+    hours: Record<number, FormattedTimetableHour[] | null>;
+    dayInfo: {
+        description: string;
+        date: string;
+    };
+}
+
 interface FormattedTimetable {
     hoursLabels: Record<
         number,
@@ -163,16 +186,7 @@ interface FormattedTimetable {
             EndTime: string;
         }
     >;
-    days: Record<
-        number | string,
-        {
-            Change: Change;
-            Subject: string;
-            Teacher: string;
-            Room: string;
-            CycleIds: string[] | null;
-        }
-    >;
+    days: Record<number, FormattedTimetableDay>;
     cycles: Record<string, Cycle>;
 }
 

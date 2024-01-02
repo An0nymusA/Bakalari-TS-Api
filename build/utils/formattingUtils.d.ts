@@ -20,6 +20,20 @@ interface FormattedMarks {
     date: FormattedMarksByDate;
     subject: FormattedMarksBySubject;
 }
+interface FormattedTimetableHour {
+    Change: Change;
+    Subject: string;
+    Teacher: string;
+    Room: string;
+    CycleIds: string[] | null;
+}
+interface FormattedTimetableDay {
+    hours: Record<number, FormattedTimetableHour[] | null>;
+    dayInfo: {
+        description: string;
+        date: string;
+    };
+}
 interface FormattedTimetable {
     hoursLabels: Record<number, {
         Id: number;
@@ -27,13 +41,7 @@ interface FormattedTimetable {
         BeginTime: string;
         EndTime: string;
     }>;
-    days: Record<number | string, {
-        Change: Change;
-        Subject: string;
-        Teacher: string;
-        Room: string;
-        CycleIds: string[] | null;
-    }>;
+    days: Record<number, FormattedTimetableDay>;
     cycles: Record<string, Cycle>;
 }
 interface FormattedKomensMessage extends KomensMessage {
