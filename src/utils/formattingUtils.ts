@@ -206,4 +206,6 @@ export type {
     FormattedMarksByDate,
     FormattedMarksBySubject,
     FormattedTimetable,
+    FormattedTimetableDay,
+    FormattedTimetableHour,
 };
