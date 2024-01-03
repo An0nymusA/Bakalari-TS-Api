@@ -26,7 +26,7 @@ class ApiConnector {
         });
         this.authOptions = authOptions; // Storing authentication options for future use
     }
-    parseVariableRoutes(endpoint = '/', payload = {}) {
+    parseVariableRoutes(endpoint = '/', payload = {}, method = 'get' || 'post') {
         for (const key in payload) {
             if (endpoint.includes(`{${key}}`) && payload[key] != null) {
                 endpoint = endpoint.replace(`{${key}}`, payload[key]);
@@ -35,7 +35,7 @@ class ApiConnector {
         }
         //Remove any remaining (blank) placeholders
         endpoint = endpoint.replaceAll(/\{.+\}/g, '');
-        return [endpoint, { params: payload }];
+        return [endpoint, method == 'get' ? { params: payload } : payload];
     }
     /**
      * Makes a GET request to the provided endpoint.
@@ -56,7 +56,7 @@ class ApiConnector {
      * @returns Promise containing the response from the POST request.
      */
     async post(endpoint = '/', payload = {}, config = {}) {
-        return this.axiosInstance.post(...this.parseVariableRoutes(endpoint, payload), config);
+        return this.axiosInstance.post(...this.parseVariableRoutes(endpoint, payload, 'post'), config);
     }
 }
 export { ApiConnector };

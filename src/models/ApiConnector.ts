@@ -33,6 +33,7 @@ class ApiConnector {
     private parseVariableRoutes(
         endpoint: string = '/',
         payload: object = {},
+        method: string = 'get' || 'post',
     ): [string, object] {
         for (const key in payload) {
             if (endpoint.includes(`{${key}}`) && payload[key] != null) {
@@ -44,7 +45,7 @@ class ApiConnector {
         //Remove any remaining (blank) placeholders
         endpoint = endpoint.replaceAll(/\{.+\}/g, '');
 
-        return [endpoint, { params: payload }];
+        return [endpoint, method == 'get' ? { params: payload } : payload];
     }
 
     /**
@@ -77,7 +78,7 @@ class ApiConnector {
         config: object = {},
     ): Promise<AxiosResponse> {
         return this.axiosInstance.post(
-            ...this.parseVariableRoutes(endpoint, payload),
+            ...this.parseVariableRoutes(endpoint, payload, 'post'),
             config,
         );
     }
