@@ -42,19 +42,20 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
     // Initialize days with a template
     for (let i = 1; i <= 5; i++) {
         days[i] = {};
-        days[i]['hours'] = { ...hoursTemplate };
+        days[i]['Hours'] = { ...hoursTemplate };
     }
 
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
         const currentDay = days[day.DayOfWeek];
 
-        currentDay['dayInfo'] = {
-            description: day.DayDescription,
-            date: day.Date,
+        currentDay['DayInfo'] = {
+            Description: day.DayDescription,
+            Date: day.Date,
+            Id: day.DayOfWeek,
         };
 
-        const hours = currentDay['hours'];
+        const hours = currentDay['Hours'];
 
         day.Atoms.forEach((atom) => {
             // Check if there is already an entry for the HourId, if not, initialize with an empty array
@@ -81,16 +82,16 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
 
     if (
         Object.values(days).every((day) =>
-            Object.values(day['hours']).every((value) => value === null),
+            Object.values(day['Hours']).every((value) => value === null),
         ) ||
         Object.values(days).every(
-            (day) => Object.keys(day['hours']).length == 0,
+            (day) => Object.keys(day['Hours']).length == 0,
         )
     ) {
         hoursLabels = trimObject(hoursLabels, 9);
 
         for (const day of Object.values(days)) {
-            day['hours'] = trimObject(day['hours'], 9);
+            day['Hours'] = trimObject(day['Hours'], 9);
         }
     } else {
         for (const keys of [
@@ -100,7 +101,7 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
             for (const hourId of keys) {
                 if (
                     Object.values(days).some(
-                        (day) => day['hours'][hourId] !== null,
+                        (day) => day['Hours'][hourId] !== null,
                     )
                 ) {
                     break;
@@ -108,21 +109,21 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
 
                 if (
                     !Object.values(days).every(
-                        (day) => day['hours'][hourId] === null,
+                        (day) => day['Hours'][hourId] === null,
                     )
                 ) {
                     continue;
                 }
 
                 for (const day of Object.values(days)) {
-                    delete day['hours'][hourId];
+                    delete day['Hours'][hourId];
                 }
                 delete hoursLabels[hourId];
             }
         }
     }
 
-    return { hoursLabels, days, cycles: timetable.Cycles };
+    return { HoursLabels: hoursLabels, Days: days, Cycles: timetable.Cycles };
 }
 
 export function formatMarks(marks: Marks): FormattedMarks {
@@ -160,7 +161,7 @@ export function formatMarks(marks: Marks): FormattedMarks {
             return acc;
         }, {});
 
-    return { subject, date };
+    return { Subject: subject, Date: date };
 }
 
 export function formatKomens(
@@ -169,12 +170,12 @@ export function formatKomens(
 ): FormattedKomens {
     const reduceKomens = (
         komens: Komens | undefined,
-        channel: string,
+        Channel: string,
     ): FormattedKomensMessage[] => {
         if (!komens || !komens.Messages) return [];
 
         return Object.values(komens.Messages).map((message) => ({
-            channel,
+            Channel,
             ...message,
         }));
     };
@@ -209,8 +210,8 @@ interface FormattedMarksBySubject {
 }
 
 interface FormattedMarks {
-    date: FormattedMarksByDate;
-    subject: FormattedMarksBySubject;
+    Date: FormattedMarksByDate;
+    Subject: FormattedMarksBySubject;
 }
 
 interface FormattedTimetableHour {
@@ -221,15 +222,16 @@ interface FormattedTimetableHour {
     CycleIds: string[] | null;
 }
 interface FormattedTimetableDay {
-    hours: Record<number, FormattedTimetableHour[] | null>;
-    dayInfo: {
-        description: string;
-        date: string;
+    Hours: Record<number, FormattedTimetableHour[] | null>;
+    DayInfo: {
+        Description: string;
+        Date: string;
+        Id: number;
     };
 }
 
 interface FormattedTimetable {
-    hoursLabels: Record<
+    HoursLabels: Record<
         number,
         {
             Id: number;
@@ -238,12 +240,12 @@ interface FormattedTimetable {
             EndTime: string;
         }
     >;
-    days: Record<number, FormattedTimetableDay>;
-    cycles: Record<string, Cycle>;
+    Days: Record<number, FormattedTimetableDay>;
+    Cycles: Record<string, Cycle>;
 }
 
 interface FormattedKomensMessage extends KomensMessage {
-    channel: string;
+    Channel: string;
     _timestamp?: number;
 }
 

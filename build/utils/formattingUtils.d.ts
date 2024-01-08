@@ -17,8 +17,8 @@ interface FormattedMarksBySubject {
     };
 }
 interface FormattedMarks {
-    date: FormattedMarksByDate;
-    subject: FormattedMarksBySubject;
+    Date: FormattedMarksByDate;
+    Subject: FormattedMarksBySubject;
 }
 interface FormattedTimetableHour {
     Change: Change;
@@ -28,24 +28,25 @@ interface FormattedTimetableHour {
     CycleIds: string[] | null;
 }
 interface FormattedTimetableDay {
-    hours: Record<number, FormattedTimetableHour[] | null>;
-    dayInfo: {
-        description: string;
-        date: string;
+    Hours: Record<number, FormattedTimetableHour[] | null>;
+    DayInfo: {
+        Description: string;
+        Date: string;
+        Id: number;
     };
 }
 interface FormattedTimetable {
-    hoursLabels: Record<number, {
+    HoursLabels: Record<number, {
         Id: number;
         Caption: string;
         BeginTime: string;
         EndTime: string;
     }>;
-    days: Record<number, FormattedTimetableDay>;
-    cycles: Record<string, Cycle>;
+    Days: Record<number, FormattedTimetableDay>;
+    Cycles: Record<string, Cycle>;
 }
 interface FormattedKomensMessage extends KomensMessage {
-    channel: string;
+    Channel: string;
     _timestamp?: number;
 }
 interface FormattedKomens {

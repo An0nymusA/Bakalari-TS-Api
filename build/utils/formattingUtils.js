@@ -27,16 +27,17 @@ export function formatTimetable(timetable) {
     // Initialize days with a template
     for (let i = 1; i <= 5; i++) {
         days[i] = {};
-        days[i]['hours'] = { ...hoursTemplate };
+        days[i]['Hours'] = { ...hoursTemplate };
     }
     // Fill days with data
     Object.values(timetable.Days).forEach((day) => {
         const currentDay = days[day.DayOfWeek];
-        currentDay['dayInfo'] = {
-            description: day.DayDescription,
-            date: day.Date,
+        currentDay['DayInfo'] = {
+            Description: day.DayDescription,
+            Date: day.Date,
+            Id: day.DayOfWeek,
         };
-        const hours = currentDay['hours'];
+        const hours = currentDay['Hours'];
         day.Atoms.forEach((atom) => {
             // Check if there is already an entry for the HourId, if not, initialize with an empty array
             if (!hours[atom.HourId]) {
@@ -57,11 +58,11 @@ export function formatTimetable(timetable) {
             hours[atom.HourId].push(atomInfo);
         });
     });
-    if (Object.values(days).every((day) => Object.values(day['hours']).every((value) => value === null)) ||
-        Object.values(days).every((day) => Object.keys(day['hours']).length == 0)) {
+    if (Object.values(days).every((day) => Object.values(day['Hours']).every((value) => value === null)) ||
+        Object.values(days).every((day) => Object.keys(day['Hours']).length == 0)) {
         hoursLabels = trimObject(hoursLabels, 9);
         for (const day of Object.values(days)) {
-            day['hours'] = trimObject(day['hours'], 9);
+            day['Hours'] = trimObject(day['Hours'], 9);
         }
     }
     else {
@@ -70,20 +71,20 @@ export function formatTimetable(timetable) {
             Object.keys(hoursLabels).reverse(),
         ]) {
             for (const hourId of keys) {
-                if (Object.values(days).some((day) => day['hours'][hourId] !== null)) {
+                if (Object.values(days).some((day) => day['Hours'][hourId] !== null)) {
                     break;
                 }
-                if (!Object.values(days).every((day) => day['hours'][hourId] === null)) {
+                if (!Object.values(days).every((day) => day['Hours'][hourId] === null)) {
                     continue;
                 }
                 for (const day of Object.values(days)) {
-                    delete day['hours'][hourId];
+                    delete day['Hours'][hourId];
                 }
                 delete hoursLabels[hourId];
             }
         }
     }
-    return { hoursLabels, days, cycles: timetable.Cycles };
+    return { HoursLabels: hoursLabels, Days: days, Cycles: timetable.Cycles };
 }
 export function formatMarks(marks) {
     // Marks grouped by Subject
@@ -115,14 +116,14 @@ export function formatMarks(marks) {
         acc[mark.Id] = mark;
         return acc;
     }, {});
-    return { subject, date };
+    return { Subject: subject, Date: date };
 }
 export function formatKomens(general, noticeboard) {
-    const reduceKomens = (komens, channel) => {
+    const reduceKomens = (komens, Channel) => {
         if (!komens || !komens.Messages)
             return [];
         return Object.values(komens.Messages).map((message) => ({
-            channel,
+            Channel,
             ...message,
         }));
     };
