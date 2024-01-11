@@ -206,7 +206,9 @@ interface FormattedMarksByDate {
 }
 
 interface FormattedMarkBySubject {
-    Mark: Mark;
+    Marks: {
+        [key: string]: Mark;
+    };
     Subject: MarkSubject;
     AverageText: string;
 }

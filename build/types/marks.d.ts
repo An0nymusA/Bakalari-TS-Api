@@ -15,6 +15,7 @@ interface SubjectMarks {
 interface Mark {
     MarkDate: string;
     EditDate: string;
+    Caption: string;
     Theme: string;
     MarkText: string;
     IsInvalidDate: boolean;
