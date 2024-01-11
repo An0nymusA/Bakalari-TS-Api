@@ -198,15 +198,20 @@ export function formatKomens(
         }, {});
 }
 
+interface FormattedMarkByDate extends Mark {
+    Subject: MarkSubject;
+}
 interface FormattedMarksByDate {
-    [key: string]: Mark & { Subject: MarkSubject };
+    [key: string]: FormattedMarkByDate;
+}
+
+interface FormattedMarkBySubject {
+    Mark: Mark;
+    Subject: MarkSubject;
+    AverageText: string;
 }
 interface FormattedMarksBySubject {
-    [key: string]: {
-        Marks: Record<number, Mark>;
-        Subject: MarkSubject;
-        AverageText: string;
-    };
+    [key: string]: FormattedMarkBySubject;
 }
 
 interface FormattedMarks {
@@ -258,7 +263,9 @@ export type {
     FormattedKomensMessage,
     FormattedMarks,
     FormattedMarksByDate,
+    FormattedMarkByDate,
     FormattedMarksBySubject,
+    FormattedMarkBySubject,
     FormattedTimetable,
     FormattedTimetableDay,
     FormattedTimetableHour,
