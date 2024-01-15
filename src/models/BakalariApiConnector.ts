@@ -16,7 +16,7 @@ async function login(authOptions: BakalariAuthOptions): Promise<Login> {
     return response.data;
 }
 
-class BakalariApiConnector extends ApiConnector {
+export class BakalariApiConnector extends ApiConnector {
     declare authOptions: BakalariAuthOptions;
 
     /**
@@ -119,9 +119,7 @@ class BakalariApiConnector extends ApiConnector {
     };
 }
 
-export { BakalariApiConnector, BakalariAuthOptions };
-
-interface BakalariAuthOptions extends AuthOptions {
+export interface BakalariAuthOptions extends AuthOptions {
     username?: string;
     password?: string;
     token?: string;

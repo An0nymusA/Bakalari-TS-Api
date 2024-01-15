@@ -1,8 +1,8 @@
-interface TimetableOptions {
+export interface TimetableOptions {
     type?: 'permanent' | 'actual';
     date?: string;
 }
-interface Timetable {
+export interface Timetable {
     Hours?: Array<Hour>;
     Days?: Array<Day>;
     Classes?: Record<string, TimetableClass>;
@@ -12,7 +12,7 @@ interface Timetable {
     Rooms?: Record<string, Room>;
     Cycles?: Record<string, Cycle>;
 }
-interface RawTimetable {
+export interface RawTimetable {
     Hours: Array<Hour>;
     Days: Array<Day>;
     Classes: Array<TimetableClass>;
@@ -22,20 +22,20 @@ interface RawTimetable {
     Rooms: Array<Room>;
     Cycles: Array<Cycle>;
 }
-interface Hour {
+export interface Hour {
     Id: number;
     Caption: string;
     BeginTime: string;
     EndTime: string;
 }
-interface Day {
+export interface Day {
     Atoms: Array<Atom>;
     DayOfWeek: number;
     Date: string;
     DayDescription: string;
     DayType: 'WorkDay' | 'Holiday' | 'Celebration' | 'Weekend';
 }
-interface Atom {
+export interface Atom {
     HourId: number;
     GroupIds: Array<string>;
     SubjectId: string | null;
@@ -46,7 +46,7 @@ interface Atom {
     HomeworkIds: Array<string>;
     Theme: string | null;
 }
-interface Change {
+export interface Change {
     Day: string;
     Hours: string;
     ChangeType: 'Canceled' | 'Added' | 'Removed' | 'RoomChanged';
@@ -55,22 +55,21 @@ interface Change {
     TypeAbbrev: string;
     TypeName: string;
 }
-interface Entry {
+export interface Entry {
     Id: string;
     Abbrev: string;
     Name: string;
 }
-interface TimetableClass extends Entry {
+export interface TimetableClass extends Entry {
 }
-interface Group extends Entry {
+export interface Group extends Entry {
     ClassId: string;
 }
-interface TimetableSubject extends Entry {
+export interface TimetableSubject extends Entry {
 }
-interface TimetableTeacher extends Entry {
+export interface TimetableTeacher extends Entry {
 }
-interface Room extends Entry {
+export interface Room extends Entry {
 }
-interface Cycle extends Entry {
+export interface Cycle extends Entry {
 }
-export { TimetableOptions, Timetable, RawTimetable, Hour, Day, Atom, Change, Entry, TimetableClass, Group, TimetableSubject, TimetableTeacher, Room, Cycle, };

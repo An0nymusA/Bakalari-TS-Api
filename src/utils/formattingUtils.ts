@@ -201,37 +201,37 @@ export function formatKomens(
         }, {});
 }
 
-interface FormattedMarkByDate extends Mark {
+export interface FormattedMarkByDate extends Mark {
     Subject: MarkSubject;
 }
-interface FormattedMarksByDate {
+export interface FormattedMarksByDate {
     [key: string]: FormattedMarkByDate;
 }
 
-interface FormattedMarkBySubject {
+export interface FormattedMarkBySubject {
     Marks: {
         [key: string]: Mark;
     };
     Subject: MarkSubject;
     AverageText: string;
 }
-interface FormattedMarksBySubject {
+export interface FormattedMarksBySubject {
     [key: string]: FormattedMarkBySubject;
 }
 
-interface FormattedMarks {
+export interface FormattedMarks {
     Date: FormattedMarksByDate;
     Subject: FormattedMarksBySubject;
 }
 
-interface FormattedTimetableHour {
+export interface FormattedTimetableHour {
     Change: Change;
     Subject: string;
     Teacher: string;
     Room: string;
     CycleIds: string[] | null;
 }
-interface FormattedTimetableDay {
+export interface FormattedTimetableDay {
     Hours: Record<number, FormattedTimetableHour[] | null>;
     DayInfo: {
         Description: string;
@@ -240,7 +240,7 @@ interface FormattedTimetableDay {
     };
 }
 
-interface FormattedTimetable {
+export interface FormattedTimetable {
     HoursLabels: Record<
         number,
         {
@@ -254,21 +254,9 @@ interface FormattedTimetable {
     Cycles: Record<string, Cycle>;
 }
 
-interface FormattedKomensMessage extends KomensMessage {
+export interface FormattedKomensMessage extends KomensMessage {
     Channel: 'noticeboard' | 'general';
 }
-interface FormattedKomens {
+export interface FormattedKomens {
     [key: string]: FormattedKomensMessage;
 }
-
-export type {
-    FormattedKomensMessage,
-    FormattedMarks,
-    FormattedMarksByDate,
-    FormattedMarkByDate,
-    FormattedMarksBySubject,
-    FormattedMarkBySubject,
-    FormattedTimetable,
-    FormattedTimetableDay,
-    FormattedTimetableHour,
-};

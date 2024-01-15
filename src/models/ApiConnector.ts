@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 // Define the ApiConnector class to manage API requests
-class ApiConnector {
+export class ApiConnector {
     /**
      * Instance of the axios library for making HTTP requests
      */
@@ -84,9 +84,7 @@ class ApiConnector {
     }
 }
 
-export { ApiConnector, AuthOptions };
-
-interface AuthOptions {
+export interface AuthOptions {
     baseUrl: string;
     suffix?: string;
     headers?: object;

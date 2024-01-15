@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-declare class ApiConnector {
+export declare class ApiConnector {
     /**
      * Instance of the axios library for making HTTP requests
      */
@@ -33,8 +33,7 @@ declare class ApiConnector {
      */
     post(endpoint?: string, payload?: object, config?: object): Promise<AxiosResponse>;
 }
-export { ApiConnector, AuthOptions };
-interface AuthOptions {
+export interface AuthOptions {
     baseUrl: string;
     suffix?: string;
     headers?: object;

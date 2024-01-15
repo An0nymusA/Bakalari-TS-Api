@@ -9,7 +9,7 @@ import { Absences } from '../types/absence.js';
 /**
  * The BakalariApi class acts as the main entry point for interacting with the Bakalari API
  */
-declare class BakalariApi {
+export declare class BakalariApi {
     /**
      * Singleton pattern: Holds a single instance of BakalariApi to ensure only one instance exists at a time
      */
@@ -76,4 +76,3 @@ declare class BakalariApi {
      */
     static getMunicipality(city: string): Promise<School[]>;
 }
-export { BakalariApi };

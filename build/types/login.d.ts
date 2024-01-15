@@ -1,4 +1,4 @@
-interface Login {
+export interface Login {
     /**
      * The version of the API
      */
@@ -33,4 +33,3 @@ interface Login {
      */
     scope: string;
 }
-export { Login };

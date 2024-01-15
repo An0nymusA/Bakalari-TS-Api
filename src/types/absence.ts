@@ -1,4 +1,4 @@
-interface Absence {
+export interface Absence {
     Date: string;
     Unsolved: number;
     Ok: number;
@@ -9,7 +9,7 @@ interface Absence {
     DistanceTeaching: number;
 }
 
-interface AbsencesPerSubject {
+export interface AbsencesPerSubject {
     SubjectName: string;
     LessonsCount: number;
     Base: number;
@@ -19,10 +19,8 @@ interface AbsencesPerSubject {
     DistanceTeaching: number;
 }
 
-interface Absences {
+export interface Absences {
     PercentageThreshold: number;
     Absences: Absence[];
     AbsencesPerSubject: AbsencesPerSubject[];
 }
-
-export { Absence, AbsencesPerSubject, Absences };

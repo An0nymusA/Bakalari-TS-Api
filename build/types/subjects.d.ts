@@ -1,7 +1,7 @@
-interface Subjects {
+export interface Subjects {
     Subjects: Array<Subject>;
 }
-interface Subject {
+export interface Subject {
     SubjectID: string;
     SubjectName: string;
     SubjectAbbrev: string;
@@ -14,4 +14,3 @@ interface Subject {
     TeacherHomePhone: string;
     TeacherMobilePhone: string;
 }
-export { Subjects, Subject };

@@ -61,7 +61,7 @@ const extractFileName = (response: AxiosResponse<unknown, unknown>): string => {
 /**
  * The BakalariApi class acts as the main entry point for interacting with the Bakalari API
  */
-class BakalariApi {
+export class BakalariApi {
     /**
      * Singleton pattern: Holds a single instance of BakalariApi to ensure only one instance exists at a time
      */
@@ -208,5 +208,3 @@ class BakalariApi {
         ).data;
     }
 }
-
-export { BakalariApi };

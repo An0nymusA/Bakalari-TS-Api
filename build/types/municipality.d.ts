@@ -1,4 +1,4 @@
-interface School {
+export interface School {
     /**
      * The ID of the school
      */
@@ -12,7 +12,7 @@ interface School {
      */
     schoolUrl: string;
 }
-interface City {
+export interface City {
     /**
      * The name of city, e.g. "Praha", "Brno - Bystrc"
      */
@@ -22,4 +22,3 @@ interface City {
      */
     schoolCount: number;
 }
-export { School, City };

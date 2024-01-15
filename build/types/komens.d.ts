@@ -1,10 +1,10 @@
-interface KomensOptions {
+export interface KomensOptions {
     noticeboard: boolean;
 }
-interface Komens {
+export interface Komens {
     Messages: KomensMessage[];
 }
-interface KomensMessage {
+export interface KomensMessage {
     $type: string;
     Id: string;
     Title: string;
@@ -26,17 +26,16 @@ interface KomensMessage {
     RelevantName: string;
     RelevantPersonType: string;
 }
-interface Sender {
+export interface Sender {
     $type: string;
     Id: string;
     Type: string;
     Name: string;
 }
-interface AttachmentInfo {
+export interface AttachmentInfo {
     $type: string;
     Id: string;
     Name: string;
     Type: string;
     Size: number;
 }
-export { Komens, KomensMessage, KomensOptions, Sender, AttachmentInfo };

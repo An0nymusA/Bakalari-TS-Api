@@ -1,6 +1,6 @@
 import axios from 'axios';
 // Define the ApiConnector class to manage API requests
-class ApiConnector {
+export class ApiConnector {
     /**
      * Instance of the axios library for making HTTP requests
      */
@@ -59,5 +59,4 @@ class ApiConnector {
         return this.axiosInstance.post(...this.parseVariableRoutes(endpoint, payload, 'post'), config);
     }
 }
-export { ApiConnector };
 //# sourceMappingURL=ApiConnector.js.map

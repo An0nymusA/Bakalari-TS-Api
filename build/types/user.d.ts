@@ -1,4 +1,4 @@
-interface User {
+export interface User {
     UserUID: string;
     Class: UserClass;
     FullName: string;
@@ -10,25 +10,24 @@ interface User {
     EnabledModules: Array<EnabledModule>;
     SettingModules: SettingModule;
 }
-interface UserClass {
+export interface UserClass {
     Id: string;
     Abbrev: string;
     Name: string;
 }
-interface EnabledModule {
+export interface EnabledModule {
     Module: string;
     Rights: Array<string>;
 }
-interface SettingModule {
+export interface SettingModule {
     Common: Common;
 }
-interface Common {
+export interface Common {
     $type: string;
     ActualSemester: ActualSemester;
 }
-interface ActualSemester {
+export interface ActualSemester {
     SemesterId: string;
     From: string;
     To: string;
 }
-export { User, UserClass, EnabledModule, SettingModule, Common, ActualSemester };

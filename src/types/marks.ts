@@ -1,9 +1,9 @@
-interface Marks {
+export interface Marks {
     Subjects: Array<SubjectMarks>;
     MarkOptions: Record<string, MarkOption>;
 }
 
-interface SubjectMarks {
+export interface SubjectMarks {
     Marks: Array<Mark>;
     Subject: MarkSubject;
     AverageText: string;
@@ -14,7 +14,7 @@ interface SubjectMarks {
     MarkPredictionEnabled: boolean;
 }
 
-interface Mark {
+export interface Mark {
     MarkDate: string;
     EditDate: string;
     Caption: string;
@@ -35,16 +35,14 @@ interface Mark {
     MaxPoints: number;
 }
 
-interface MarkSubject {
+export interface MarkSubject {
     Id: string;
     Abbrev: string;
     Name: string;
 }
 
-interface MarkOption {
+export interface MarkOption {
     Id: string;
     Abbrev: string;
     Name: string;
 }
-
-export { Marks, SubjectMarks, Mark, MarkSubject, MarkOption };

@@ -11,7 +11,7 @@ async function login(authOptions) {
     });
     return response.data;
 }
-class BakalariApiConnector extends ApiConnector {
+export class BakalariApiConnector extends ApiConnector {
     /**
      * Private constructor ensures that an instance is created only through the provided static methods
      * @param authOptions
@@ -84,5 +84,4 @@ class BakalariApiConnector extends ApiConnector {
         return new BakalariApiConnector(authOptions);
     };
 }
-export { BakalariApiConnector };
 //# sourceMappingURL=BakalariApiConnector.js.map
