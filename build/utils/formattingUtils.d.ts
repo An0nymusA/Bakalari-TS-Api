@@ -3,7 +3,7 @@ import { Mark, Marks, MarkSubject } from '../types/marks.js';
 import { Change, Cycle, Timetable } from '../types/timetable.js';
 export declare function formatTimetable(timetable: Timetable): FormattedTimetable;
 export declare function formatMarks(marks: Marks): FormattedMarks;
-export declare function formatKomens(general: Komens, noticeboard?: Komens): FormattedKomensMessage[];
+export declare function formatKomens(general: Komens, noticeboard?: Komens): FormattedKomens;
 interface FormattedMarkByDate extends Mark {
     Subject: MarkSubject;
 }
@@ -50,7 +50,9 @@ interface FormattedTimetable {
     Cycles: Record<string, Cycle>;
 }
 interface FormattedKomensMessage extends KomensMessage {
-    Channel: string;
-    _timestamp?: number;
+    Channel: 'noticeboard' | 'general';
+}
+interface FormattedKomens {
+    [key: string]: FormattedKomensMessage;
 }
 export type { FormattedKomensMessage, FormattedMarks, FormattedMarksByDate, FormattedMarkByDate, FormattedMarksBySubject, FormattedMarkBySubject, FormattedTimetable, FormattedTimetableDay, FormattedTimetableHour, };

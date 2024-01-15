@@ -171,10 +171,10 @@ export function formatMarks(marks: Marks): FormattedMarks {
 export function formatKomens(
     general: Komens,
     noticeboard?: Komens,
-): FormattedKomensMessage[] {
+): FormattedKomens {
     const reduceKomens = (
         komens: Komens | undefined,
-        Channel: string,
+        Channel: 'noticeboard' | 'general',
     ): FormattedKomensMessage[] => {
         if (!komens || !komens.Messages) return [];
 
@@ -189,11 +189,16 @@ export function formatKomens(
         ...reduceKomens(general, 'general'),
     ];
 
-    return formatted.sort((a, b) => {
-        const dateA = new Date(a.SentDate);
-        const dateB = new Date(b.SentDate);
-        return Number(dateB) - Number(dateA);
-    });
+    return formatted
+        .sort((a, b) => {
+            const dateA = new Date(a.SentDate);
+            const dateB = new Date(b.SentDate);
+            return Number(dateB) - Number(dateA);
+        })
+        .reduce((acc, message) => {
+            acc[message.Id] = message;
+            return acc;
+        }, {});
 }
 
 interface FormattedMarkByDate extends Mark {
@@ -250,8 +255,10 @@ interface FormattedTimetable {
 }
 
 interface FormattedKomensMessage extends KomensMessage {
-    Channel: string;
-    _timestamp?: number;
+    Channel: 'noticeboard' | 'general';
+}
+interface FormattedKomens {
+    [key: string]: FormattedKomensMessage;
 }
 
 export type {
