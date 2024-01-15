@@ -135,15 +135,10 @@ export function formatKomens(general, noticeboard) {
         ...reduceKomens(noticeboard, 'noticeboard'),
         ...reduceKomens(general, 'general'),
     ];
-    return formatted
-        .sort((a, b) => {
-        const dateA = new Date(a.SentDate);
-        const dateB = new Date(b.SentDate);
-        return Number(dateB) - Number(dateA);
-    })
-        .reduce((acc, message) => {
-        acc[message.Id] = message;
-        return acc;
-    }, {});
+    return formatted.sort((a, b) => {
+        const aTime = new Date(a.SentDate).getTime();
+        const bTime = new Date(b.SentDate).getTime();
+        return bTime - aTime;
+    });
 }
 //# sourceMappingURL=formattingUtils.js.map
