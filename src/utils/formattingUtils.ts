@@ -129,7 +129,11 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
 export function formatMarks(marks: Marks): FormattedMarks {
     // Marks grouped by Subject
     const subject = Object.values(marks.Subjects).reduce((acc, subject) => {
-        const marksMap = subject.Marks.reduce((marksAcc, mark) => {
+        const marksMap = subject.Marks.sort((a, b) => {
+            const dateA = new Date(a.MarkDate);
+            const dateB = new Date(b.MarkDate);
+            return Number(dateB) - Number(dateA);
+        }).reduce((marksAcc, mark) => {
             marksAcc[mark.Id] = mark;
             return marksAcc;
         }, {});
