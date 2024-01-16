@@ -127,6 +127,9 @@ export class BakalariApi {
         });
         return { data: response.data, filename: extractFileName(response) };
     }
+    attachmentUrl(id) {
+        return `${this.connector.authOptions.baseUrl}/api/3/komens/attachment/${id}`;
+    }
     static async getMunicipality(city) {
         const connector = new ApiConnector({
             baseUrl: 'http://sluzby.bakalari.cz/api/v1/municipality/',

@@ -185,6 +185,10 @@ export class BakalariApi {
         return { data: response.data, filename: extractFileName(response) };
     }
 
+    attachmentUrl(id: string): string {
+        return `${this.connector.authOptions.baseUrl}/api/3/komens/attachment/${id}`;
+    }
+
     /**
      * Gets list of schools
      */

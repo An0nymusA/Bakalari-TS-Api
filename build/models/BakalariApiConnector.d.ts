@@ -7,6 +7,7 @@ export declare class BakalariApiConnector extends ApiConnector {
      */
     private constructor();
     private initAutoRelogin;
+    getAuthHeader: () => Record<string, string>;
     /**
      * Static method for logging into the Bakalari API
      * @param authOptions - Authentication options to be used for logging in

@@ -59,6 +59,10 @@ export class BakalariApiConnector extends ApiConnector {
         );
     };
 
+    getAuthHeader = (): Record<string, string> => {
+        return { Authorization: `Bearer ${this.authOptions.token}` };
+    };
+
     /**
      * Static method for logging into the Bakalari API
      * @param authOptions - Authentication options to be used for logging in
@@ -105,6 +109,11 @@ export class BakalariApiConnector extends ApiConnector {
                 'Either token or username and password must be set',
             );
         }
+
+        authOptions = {
+            ...authOptions,
+            baseUrl: authOptions.baseUrl.replace(/\/$/, ''),
+        };
 
         // If no tokens are provided, attempts to login to the Bakalari API using the provided credentials
         if (authOptions.token == null) {

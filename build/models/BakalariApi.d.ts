@@ -66,6 +66,7 @@ export declare class BakalariApi {
         data: unknown;
         filename: string;
     }>;
+    attachmentUrl(id: string): string;
     /**
      * Gets list of schools
      */

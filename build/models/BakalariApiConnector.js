@@ -40,6 +40,9 @@ export class BakalariApiConnector extends ApiConnector {
             return this.axiosInstance(originalRequest);
         });
     };
+    getAuthHeader = () => {
+        return { Authorization: `Bearer ${this.authOptions.token}` };
+    };
     /**
      * Static method for logging into the Bakalari API
      * @param authOptions - Authentication options to be used for logging in
@@ -75,6 +78,10 @@ export class BakalariApiConnector extends ApiConnector {
             authOptions.token == null) {
             throw new Error('Either token or username and password must be set');
         }
+        authOptions = {
+            ...authOptions,
+            baseUrl: authOptions.baseUrl.replace(/\/$/, ''),
+        };
         // If no tokens are provided, attempts to login to the Bakalari API using the provided credentials
         if (authOptions.token == null) {
             await BakalariApiConnector.login(authOptions);
