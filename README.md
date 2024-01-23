@@ -1,3 +1,7 @@
+# Bakalari-TS-Api
+
+Typescript connector for accessing Bakalari api
+
 ## Client initiaizing
 
 ### Using password
@@ -7,9 +11,10 @@
 ```js
 import { BakalariAPI } from 'bakalari-ts-api';
 
-const api = new BakalariAPI({
-    name: 'pepavomacka'
-    password: '*'
+const api = await BakalariApi.initialize({
+    baseUrl: 'https://moje.bakalari.cz',
+    username: 'pepa',
+    password: `12345`,
 });
 ```
 
@@ -19,6 +24,7 @@ const api = new BakalariAPI({
 import { BakalariAPI } from 'bakalari-ts-api';
 
 const api = new BakalariAPI({
+    baseUrl: 'https://moje.bakalari.cz',
     token: TOKEN,
 });
 ```
@@ -31,6 +37,7 @@ const api = new BakalariAPI({
 import { BakalariAPI } from 'bakalari-ts-api';
 
 const api = new BakalariAPI({
+    baseUrl: 'https://moje.bakalari.cz',
     refreshToken: REFRESH_TOKEN,
 });
 ```
