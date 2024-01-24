@@ -25,10 +25,12 @@ export interface FormattedMarks {
     Subject: FormattedMarksBySubject;
 }
 export interface FormattedTimetableHour {
-    Change: Change;
-    Subject: string;
-    Teacher: string;
-    Room: string;
+    Change?: Change;
+    Subject?: string;
+    SubjectFull?: string;
+    Teacher?: string;
+    TeacherFull?: string;
+    Room?: string;
     CycleIds: string[] | null;
 }
 export interface FormattedTimetableDay {

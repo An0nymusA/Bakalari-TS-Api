@@ -43,10 +43,14 @@ export function formatTimetable(timetable) {
             if (!hours[atom.HourId]) {
                 hours[atom.HourId] = [];
             }
+            const Subject = timetable.Subjects[atom.SubjectId];
+            const Teacher = timetable.Teachers[atom.TeacherId];
             // Create a new object representing the current atom's information
             const atomInfo = {
-                Subject: timetable.Subjects[atom.SubjectId]?.Abbrev,
-                Teacher: timetable.Teachers[atom.TeacherId]?.Abbrev,
+                Subject: Subject?.Abbrev,
+                SubjectFull: Subject?.Name,
+                Teacher: Teacher?.Abbrev,
+                TeacherFull: Teacher?.Name,
                 Room: timetable.Rooms[atom.RoomId]?.Abbrev,
                 Change: atom.Change,
                 CycleIds: atom.CycleIds.reduce((acc, curr) => {

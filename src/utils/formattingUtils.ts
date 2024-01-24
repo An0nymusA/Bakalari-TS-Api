@@ -63,10 +63,15 @@ export function formatTimetable(timetable: Timetable): FormattedTimetable {
                 hours[atom.HourId] = [];
             }
 
+            const Subject = timetable.Subjects[atom.SubjectId];
+            const Teacher = timetable.Teachers[atom.TeacherId];
+
             // Create a new object representing the current atom's information
             const atomInfo = {
-                Subject: timetable.Subjects[atom.SubjectId]?.Abbrev,
-                Teacher: timetable.Teachers[atom.TeacherId]?.Abbrev,
+                Subject: Subject?.Abbrev,
+                SubjectFull: Subject?.Name,
+                Teacher: Teacher?.Abbrev,
+                TeacherFull: Teacher?.Name,
                 Room: timetable.Rooms[atom.RoomId]?.Abbrev,
                 Change: atom.Change,
                 CycleIds: atom.CycleIds.reduce((acc, curr) => {
@@ -220,10 +225,12 @@ export interface FormattedMarks {
 }
 
 export interface FormattedTimetableHour {
-    Change: Change;
-    Subject: string;
-    Teacher: string;
-    Room: string;
+    Change?: Change;
+    Subject?: string;
+    SubjectFull?: string;
+    Teacher?: string;
+    TeacherFull?: string;
+    Room?: string;
     CycleIds: string[] | null;
 }
 export interface FormattedTimetableDay {
